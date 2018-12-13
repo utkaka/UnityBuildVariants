@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildVariants", "BuildVariants.csproj", "{CDC32FAB-1F23-4E9E-91C8-F6D882B77B5A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CDC32FAB-1F23-4E9E-91C8-F6D882B77B5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC32FAB-1F23-4E9E-91C8-F6D882B77B5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDC32FAB-1F23-4E9E-91C8-F6D882B77B5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC32FAB-1F23-4E9E-91C8-F6D882B77B5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
