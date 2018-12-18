@@ -113,6 +113,6 @@
   </Target>
   <Target Name="CopyOutputToUnityProject">
     <Message Text="Copy" />
-    <Copy SourceFiles="@(FilesToCopyToUnityProject)" DestinationFolder="$(CurrentUnityProjectPath)" />
+    <Copy SourceFiles="@(FilesToCopyToUnityProject)" DestinationFolder="$(CurrentUnityProjectPath)" Condition="'$(CurrentUnityProjectPath)' != '' "/>
   </Target>
 </Project>
