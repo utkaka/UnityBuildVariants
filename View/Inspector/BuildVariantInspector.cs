@@ -124,7 +124,7 @@ namespace BuildVariants.View.Inspector {
 
             EditorGUILayout.Space();
             inspectedBuildVariant.BuildOptions =
-                (BuildOptions) EditorGUILayout.EnumMaskPopup("Build options:", inspectedBuildVariant.BuildOptions);
+                (BuildOptions) EditorGUILayout.EnumFlagsField("Build options:", inspectedBuildVariant.BuildOptions);
             
             EditorGUILayout.Space();
             DrawFilesList(inspectedBuildVariant, inspectedBuildVariant.MoveFiles);
