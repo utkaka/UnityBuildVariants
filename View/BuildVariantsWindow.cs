@@ -1,4 +1,5 @@
-﻿using BuildVariants.Controller;
+﻿using System;
+using BuildVariants.Controller;
 using BuildVariants.Controller.BuildInfo;
 using BuildVariants.Controller.BuildVariants;
 using BuildVariants.Controller.ProjectSettings;
@@ -25,11 +26,17 @@ namespace BuildVariants.View {
 
         private BuildTargetIcons _buildTargetIcons;
 
+        private bool _initialized;
+
         private void Awake() {
             titleContent = new GUIContent("Build Variants");
         }
 
         private void OnFocus() {
+            _initialized = false;
+        }
+        
+        private void Initialize() {
             _buildTargetIcons = new BuildTargetIcons();
             
             var projectSettingsStorage = new ProjectSettingsStorage(BuildController.PluginFolder);
@@ -43,15 +50,36 @@ namespace BuildVariants.View {
             
             _variantsExplorer = new BuildVariantsExplorer(_buildVariantsController, _buildInfoController, _buildTargetIcons, _projectSettingsController);
             _variantInspector = new BuildVariantInspector(_buildVariantsController, _buildInfoController, _projectSettingsController);
+
+            _initialized = true;
         }
     
         private void OnGUI()
         {
-            EditorGUILayout.BeginHorizontal();
-            _variantsExplorer.Draw();
-            EditorGUILayout.LabelField("", GUI.skin.verticalSlider,  GUILayout.Height(position.height), GUILayout.Width(4.0f));
-            _variantInspector.Draw();
-            EditorGUILayout.EndHorizontal();
+            if (!_initialized) {
+                if (EditorSettings.serializationMode != SerializationMode.ForceText) {
+                    EditorGUILayout.LabelField(
+                        string.Format("This plugin requires 'Force Text' serialization mode, but project has '{0}' serialization mode.", 
+                            Enum.GetName(typeof(SerializationMode), EditorSettings.serializationMode)));
+                    EditorGUILayout.Space();
+                    if (GUILayout.Button("Change serialization mode to 'Force Text'")) {
+                        EditorSettings.serializationMode = SerializationMode.ForceText;
+                        Initialize();
+                    }
+                    if (GUILayout.Button("I don't need it. Close")) {
+                        Close();
+                    }
+                } else {
+                    Initialize();
+                }
+            }
+            if (_initialized) {
+                EditorGUILayout.BeginHorizontal();
+                _variantsExplorer.Draw();
+                EditorGUILayout.LabelField("", GUI.skin.verticalSlider,  GUILayout.Height(position.height), GUILayout.Width(4.0f));
+                _variantInspector.Draw();
+                EditorGUILayout.EndHorizontal();   
+            }
         }
     }
 }
