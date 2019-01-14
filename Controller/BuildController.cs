@@ -178,7 +178,7 @@ namespace BuildVariants.Controller {
 
             File.Move(from, to);
             return () => {
-                File.Move(from, to);
+                File.Move(to, from);
                 restoreToFile();
             };
         }
